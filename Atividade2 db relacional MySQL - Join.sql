@@ -9,10 +9,10 @@ USE db_pizzaria_legal;
 
 -- Crie a tabela tb_pizzas e determine 4 atributos, além da Chave Primária, relevantes para classificar as pizzas.
 CREATE TABLE tb_categorias(
-id_categorias bigint auto_increment,
+id bigint auto_increment,
 variedade varchar (50),
 preparacao varchar (50),
-PRIMARY KEY(id_categorias)
+PRIMARY KEY(id)
 );
 
 -- Insira 5 registros na tabela tb_categorias.
@@ -21,23 +21,24 @@ VALUES('especial', 'forno à gas');
 INSERT INTO tb_categorias(variedade, preparacao) 
 VALUES('tradicional', 'forno à lenha');
 INSERT INTO tb_categorias(variedade, preparacao)  
-VALUES('legitima', 'forno siciliano');
+VALUES('legítima', 'forno siciliano');
 INSERT INTO tb_categorias(variedade, preparacao)  
 VALUES('moda da casa', 'forno elétrico');
 INSERT INTO tb_categorias(variedade, preparacao)  
 VALUES('personalizada', 'cliente escolhe');
 
+SELECT * FROM tb_categorias;
 
 -- Crie a tabela tb_pizzas e determine 4 atributos, além da Chave Primária, relevantes aos produtos da pizzaria.
 CREATE TABLE tb_pizzas(
-id_pizzas bigint auto_increment,
+id bigint auto_increment,
 sabor varchar(60),
 tamanho varchar(50),
-valor decimal(4,2),
+valor decimal(5,2),
 borda boolean,
 categoria_id bigint,
-PRIMARY KEY(id_pizzas),
-FOREIGN KEY(categoria_id) REFERENCES tb_categorias(id_categorias)
+PRIMARY KEY(id),
+FOREIGN KEY(categoria_id) REFERENCES tb_categorias(id)
 );
 
 -- Insira 8 registros na tabela tb_pizzas, preenchendo a Chave Estrangeira 
@@ -72,14 +73,14 @@ SELECT * FROM tb_pizzas WHERE sabor LIKE "%M%";
 SELECT * 
 	FROM tb_pizzas 
     INNER JOIN tb_categorias 
-    ON tb_pizzas.categoria_id = tb_categorias.id_categorias; 
+    ON tb_pizzas.categoria_id = tb_categorias.id; 
     
 -- Faça um SELECT utilizando a cláusula INNER JOIN, unindo os dados da tabela tb_pizzas com os dados da tabela tb_categorias, 
 -- onde traga apenas as pizzas que pertençam a uma categoria específica (Exemplo: Todas as pizzas que são doce).    
 SELECT * 
 	FROM tb_pizzas 
     INNER JOIN tb_categorias 
-    ON tb_pizzas.categoria_id = tb_categorias.id_categorias 
+    ON tb_pizzas.categoria_id = tb_categorias.id
     WHERE tb_categorias.variedade = 'tradicional';
 
 
